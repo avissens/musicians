@@ -52,7 +52,6 @@ class Band(object): #A new class Band to hire and fire members
         
     def fire(self):
 #firing band members
-#        band_members = {"drummer":"hired", "guitarist":"hired", "bassist":"hired"}
         for i in self.band_members:
             ask_member = input("Did you practice our gig yesterday?" + "\nyes/no: ")
             if ask_member == "no":
@@ -62,20 +61,23 @@ class Band(object): #A new class Band to hire and fire members
                 print("Well done!")
             else:
                 ask_member = input("I didn't get that... Did you practice our gig yesterday?" + "\nyes/no: ")
-        print(self.band_members)
-
+#        print(self.band_members)
+        return self.band_members
+        
     def play_solo(self):
 #playing solo
             if self.band_members["drummer"] == True:
                 print("Let's play then!")
                 nick.counting()
                 if self.band_members["guitarist"] == True:
-                    bob.solo(5)
+                    bob.solo(6)
                 if self.band_members["bassist"] == True:
-                    paul.solo(5)
+                    paul.solo(6)
+                else:
+                    print("Oops, but we need to hire more musicians...")
             else:
-                print("Sorry, but we don't have a drummer!")
-            
+                print("Sorry, but we don't have a drummer!")        
+
 if __name__ == "__main__":
     bandx = Band()
     bob = Guitarist()
@@ -84,3 +86,6 @@ if __name__ == "__main__":
     bandx.hire()
     bandx.fire()
     bandx.play_solo()
+    
+
+
