@@ -29,6 +29,7 @@ class Drummer(Musician): #A new class of drummers
     def counting(self): #counting to 4
         for i in range(1,5):
             print(i)
+        print("\n")
             
     def combust(self): #producing combustion sound
         print("Bang!")
@@ -40,17 +41,23 @@ class Band(object): #A new class Band to hire and fire members
     def hire(self):
 #hiring band members
             for item in self.band_members:
-                new_member = input("Are you: guitarist, bassist or drummer? ")
-                if new_member in self.band_members and self.band_members[item] != True:
-                    self.band_members[item] = True
-                    print("You are hired!")
-                elif new_member in self.band_members and self.band_members[item] == True:
-                    print("Sorry, we have already hired one...")
-                else:
-                    new_member = input("Sorry, I didn't get that... Are you: guitarist, bassist or drummer? ")
+                while True:
+                    new_member = input("Are you a guitarist, bassist or drummer? ")
+                    if new_member in self.band_members and self.band_members[item] == None:
+                        self.band_members[item] = True
+                        print("You are hired!")
+                        print(self.band_members)
+                        break
+                    elif new_member in self.band_members and self.band_members[item] == True:
+                        print("Sorry, we have already hired one...")
+                        print(self.band_members)
+                        break
+                    else:
+                        print("Sorry, I didn't get that...")
+                        print(self.band_members)
+                        continue
             print(self.band_members)
             return self.band_members
-            
     def fire(self):
 #firing band members
         for i in self.band_members:
@@ -76,7 +83,7 @@ class Band(object): #A new class Band to hire and fire members
                 if self.band_members["bassist"] == True:
                     paul.solo(6)
                 else:
-                    print("Oops, but we need to hire more musicians...")
+                    print("Oops, we need to hire more musicians...")
             else:
                 print("Sorry, but we don't have a drummer!")        
 
