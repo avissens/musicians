@@ -44,13 +44,14 @@ class Band(object): #A new class Band to hire and fire members
                 if new_member in self.band_members and self.band_members[item] != True:
                     self.band_members[item] = True
                     print("You are hired!")
+                    if new_member not self.band_members:
+                        new_member = input("Sorry, I didn't get that... Are you: guitarist, bassist or drummer? ")
                 elif new_member in self.band_members and self.band_members[item] == True:
                     print("Sorry, we have already hired one...")
-                else:
-                    new_member = input("Sorry, I didn't get that... Are you: guitarist, bassist or drummer? ")
+  #              else:
+  #                  new_member = input("Sorry, I didn't get that... Are you: guitarist, bassist or drummer? ")
             print(self.band_members)
             return self.band_members
-            
     def fire(self):
 #firing band members
         for i in self.band_members:
@@ -76,7 +77,7 @@ class Band(object): #A new class Band to hire and fire members
                 if self.band_members["bassist"] == True:
                     paul.solo(6)
                 else:
-                    print("Oops, but we need to hire more musicians...")
+                    print("Oops, we need to hire more musicians...")
             else:
                 print("Sorry, but we don't have a drummer!")        
 
@@ -88,6 +89,3 @@ if __name__ == "__main__":
     bandx.hire()
     bandx.fire()
     bandx.play_solo()
-    
-
-
