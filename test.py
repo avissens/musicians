@@ -36,35 +36,35 @@ class Drummer(Musician): #A new class of drummers
         
 class Band(object): #A new class Band to hire and fire members
     def __init__(self):
-        self.band_members = {"drummer": None, "guitarist": None, "bassist": None}
+        self.hire_list = ["drummer", "guitarist", "bassist"]
+        self.band_members = []
+        self.hired_list = []
         
     def hire(self):
 #hiring band members
-            for item in self.band_members:
-                while True:
-                    new_member = input("Are you a guitarist, bassist or drummer? ")
-                    if new_member in self.band_members and self.band_members[new_member] == None:
-                        self.band_members[new_member] = True
-                        print("You are hired!")
-                        print(self.band_members)
-                        break
-                    elif new_member in self.band_members and self.band_members[item] == True:
-                        print("Sorry, we have already hired one...")
-                        print(self.band_members)
-                        break
-                    else:
-                        print("Sorry, I didn't get that...")
-                        print(self.band_members)
-                        continue
-            print(self.band_members)
-            return self.band_members
+        for item in self.hire_list:
+            while True:
+                new_member = input("Are you a guitarist, bassist or drummer? ")
+                if new_member not in self.band_members and new_member in self.hire_list:
+                    self.band_members.append(new_member)
+                    self.hired_list.append(new_member)
+                    print("You are hired!")
+                    break
+                elif new_member in self.band_members:
+                    print("Sorry, we have already hired one...")
+                    break
+                else:
+                    print("Sorry, I didn't get that...")
+                    continue
+        print(self.band_members)
+        return self.band_members, self.hired_list
             
     def fire(self):
 #firing band members
-        for i in self.band_members:
+        for item in self.hired_list:
             ask_member = input("Did you practice our gig yesterday?" + "\nyes/no: ")
             if ask_member == "no":
-                self.band_members[i] = False
+                self.band_members.remove(item)
                 print("You are fired!")
             elif ask_member == "yes":                    
                 print("Well done!")
@@ -72,31 +72,51 @@ class Band(object): #A new class Band to hire and fire members
                 ask_member = input("I didn't get that... Did you practice our gig yesterday?" + "\nyes/no: ")
         print(self.band_members)
         return self.band_members
-        
+
+    def check_drummer(self):
+#checking if there is a drummer
+        if "drummer" in self.band_members:
+            print("Let's play then!")
+            return True
+        else:
+            print("Sorry, but we don't have a drummer!")
+            return False
+    def check_bassist(self):
+#checking if there is a bassist
+        if "bassist" in self.band_members:
+            return True    
+    def check_guitarist(self):
+#checking if there is a guitarist
+        if "guitarist" in self.band_members:
+            return True 
+"""            
     def play_solo(self):
 #playing solo
-            if self.band_members["drummer"] == True:
-                print("Let's play then!")
-                nick.counting()
-                nick.solo(6)
-                if self.band_members["guitarist"] == True:
-                    bob.solo(6)
-                if self.band_members["bassist"] == True:
-                    paul.solo(6)
-                else:
-                    print("Oops, we need to hire more musicians...")
-            else:
-                print("Sorry, but we don't have a drummer!")        
-
+        for member in self.band_members:
+            if "drummer" in self.band_members:
+                member.solo(6)
+            if "guitarist" in self.band_members:
+                member.solo(6)
+            if "bassist" in self.band_members:
+                member.solo(6)
+"""
+#creating instances for each class            
+bandx = Band()
+bob = Guitarist()
+nick = Drummer()
+paul = Bassist()
+    
 if __name__ == "__main__":
-    bandx = Band()
-    bob = Guitarist()
-    nick = Drummer()
-    paul = Bassist()
-    bandx.hire(bob)
-    bandx.hire(nick)
-    bandx.hire(paul)
-    bandx.fire(bob)
-    bandx.fire(nick)
-    bandx.fire(paul)
-    bandx.play_solo()
+    bandx.hire()
+    bandx.fire()
+    drummer = bandx.check_drummer()
+    if drummer == True:
+        nick.counting()
+        nick.solo(6)
+    bassist = bandx.check_bassist()
+    if bassist == True:
+        bob.solo(6)
+    guitarist = bandx.check_guitarist()
+    if guitarist == True:
+        paul.solo(6)        
+        
