@@ -43,8 +43,8 @@ class Band(object): #A new class Band to hire and fire members
             for item in self.band_members:
                 while True:
                     new_member = input("Are you a guitarist, bassist or drummer? ")
-                    if new_member in self.band_members and self.band_members[item] == None:
-                        self.band_members[item] = True
+                    if new_member in self.band_members and self.band_members[new_member] == None:
+                        self.band_members[new_member] = True
                         print("You are hired!")
                         print(self.band_members)
                         break
@@ -58,6 +58,7 @@ class Band(object): #A new class Band to hire and fire members
                         continue
             print(self.band_members)
             return self.band_members
+            
     def fire(self):
 #firing band members
         for i in self.band_members:
